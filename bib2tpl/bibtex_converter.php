@@ -266,6 +266,14 @@ class BibtexConverter
       if ($entry['month'] && array_key_exists($entry['month'],$month_expand)) {
           $entry['month'] = $month_expand[$entry['month']];
       }
+      // Another hack: URLs often wrapped in \url{} commands for nice 
+      // formatting in LaTeX: strip that out. Note that the {} have already 
+      // been  stripped out!
+      if (array_key_exists('url',$entry)) {
+        if ( preg_match('/^\\\\url(.+)$/',$entry['url'],$matches) ) {
+            $entry['url'] = $matches[1];
+        }
+      }
     }
   }
 
