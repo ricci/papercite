@@ -5,6 +5,9 @@
  * @author Benjamin Piwowarski
  * @version 1.0
  */
+
+require_once(dirname(__FILE__) . "/../lib/UTF8.php");
+
 class BibtexEntryFormat {
   var $formats = array();
   var $properties = array();
@@ -321,11 +324,11 @@ class BibtexEntryFormat {
           {
             if($firstTime)
               {
-                $firstNameInitialMake = mb_strtoupper(mb_substr(trim($name), 0, 1));
+                $firstNameInitialMake = UTF8::utf8_strtoupper(UTF8::utf8_substr(trim($name), 0, 1));
                 $firstTime = FALSE;
               }
             else
-              $initials[] = mb_strtoupper(mb_substr(trim($name), 0, 1));
+              $initials[] = UTF8::utf8_strtoupper(UTF8::utf8_substr(trim($name), 0, 1));
           }
         if(isset($initials))
           {
