@@ -85,6 +85,14 @@ class Bib2TplHelper
    {
      $month = $entry['month'];
    }
+
+   // Turn standard bibtex abbreviations into ints
+   $month_abbrevs = array(1 => "jan", "feb", "mar", "apr", "may", "jun",
+       "jul","aug","sep","oct","nov","dec");
+   $numeric_month = array_search($month, $month_abbrevs);
+   if ($numeric_month) {
+       $month = $numeric_month;
+   }
    
    // if month is 1 or 2 decimal places then return it with zero padding e.i. 00,..05,..12  
    if ( preg_match('/^\d[\d]$/', $month) )

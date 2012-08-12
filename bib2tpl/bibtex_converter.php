@@ -256,6 +256,16 @@ class BibtexConverter
     foreach ( $data as &$entry ) {
       $entry['firstauthor'] = $entry['author']->authors[0]["surname"];
       $entry['entryid'] = $id++;
+      // Hack: not really the best place to do this!
+      $month_expand = array ( 'jan' => 'January', 'feb' => 'February',
+                              'mar' => 'March', 'apr' => 'April',
+                              'may' => 'May', 'jun' => 'June',
+                              'jul' => 'July', 'aug' => 'August',
+                              'sep' => 'September', 'oct' => 'October',
+                              'nov' => 'November', 'dec' => 'December' );
+      if ($entry['month'] && array_key_exists($entry['month'],$month_expand)) {
+          $entry['month'] = $month_expand[$entry['month']];
+      }
     }
   }
 
