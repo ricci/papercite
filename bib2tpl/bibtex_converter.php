@@ -269,9 +269,11 @@ class BibtexConverter
       // Another hack: URLs often wrapped in \url{} commands for nice 
       // formatting in LaTeX: strip that out. Note that the {} have already 
       // been  stripped out!
-      if (array_key_exists('url',$entry)) {
-        if ( preg_match('/^\\\\url(.+)$/',$entry['url'],$matches) ) {
-            $entry['url'] = $matches[1];
+      foreach (array('url','howpublished') as $field) {
+        if (array_key_exists($field,$entry)) {
+          if ( preg_match('/^\\\\url(.+)$/',$entry[$field],$matches) ) {
+              $entry[$field] = $matches[1];
+          }
         }
       }
     }
